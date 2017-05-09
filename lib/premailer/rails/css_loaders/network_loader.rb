@@ -7,6 +7,8 @@ class Premailer
         def load(url)
           uri = uri_for_url(url)
           Net::HTTP.get(uri) if uri
+        rescue StandardError => e
+          raise "Could not retrieve asset: #{uri}, #{e.inspect}"
         end
 
         def uri_for_url(url)
